@@ -49,7 +49,7 @@ var commands = {
         }
     }
 }
-/* 
+/*
  * Process commands and delegate them to the right processor
  *  msg.channel.send("HOMOCF23FBSM");
  */
@@ -60,9 +60,6 @@ function executeCommand(client, command, suffix, msg) {
     }
     if (command in commands) {
         commands[command].process(client, msg, suffix);
-        /*
-            msg.channel.send("O " + msg.author.username + " ipe m na gire4o ntampoushi pou to " + command + " je na tous po " + suffix);
-            */
     }
 }
 client.on('presence', (user, status) => {
@@ -88,5 +85,5 @@ if (auth.token) {
     console.log('Logging in with token');
     client.login(auth.token);
 } else {
-    console.log('Please add your bot token to auth.json.\n Terminating!')
+    console.log('Please add your bot token to auth.json.\n Terminating!');
 }
