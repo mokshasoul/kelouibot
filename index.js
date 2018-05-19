@@ -5,7 +5,7 @@
  * @license MIT
  */
 'use strict';
-// import discord.js
+
 const Discord = require('discord.js');
 
 console.log('Booting keluiBot\n');
@@ -18,34 +18,55 @@ const client = new Discord.Client();
 var Config = {};
 try {
     var Config = require('./config.json');
-}catch (e){
+} catch (e) {
     console.log(e.stack);
     console.log(process.version);
     console.log('Please create config file');
 }
-
 Config.commandprefix = '!';
 
 var commands = {
-    'whofuckedup' : {
+    'whofuckedup': {
         description: 'our very own hello world',
-        process: function(bot, msg, suffix) {
+        process: function (client, msg) {
             var text = 'ilias ofc\n';
             msg.channel.send(text);
-        }        
-    } 
-}
+        }
+    },
+    'youtube': {
+        description: 'will be implemented',
+        process: function (client, msg) {
+            msg.channel.send("o mixalakis e vlakas");
+        }
+    }
 
+}
+/* 
+ * Process commands and delegate them to the right processor
+ *  msg.channel.send("HOMOCF23FBSM");
+ */
+function executeCommand(client, command, suffix, msg) {
+    if(suffix typeof undefined){
+        console.log("setting suffix to default value");
+        suffix = "";
+    }
+    if( command in commands) {
+        commands[command].process(client, msg);
+        msg.channel.send("O " + msg.author.username + " ipe m na gire4o ntampoushi pou to " + command + " je na tous po " + suffix);
+    }
+}
+client.on('presence', (user, status) => {
+    console.log(user + " " + status);
+});
 client.on('ready', () => {
     // Greet the channel
     console.log('Serving channels' + client.channels.size);
 });
 client.on('message', msg => {
-    if (msg.content === "ping") {
-        msg.reply('pong');
-    }
-    if(msg.content === "!gamoton") {
-        msg.reply('gamo ton ilia');
+    if (msg.author.id !== client.user.id && msg.content.startsWith(Config.commandprefix)) {
+        console.log("Command: " + msg.content + " invoked by " + msg.author.username);
+        var tmp = msg.content.slice(1, msg.content.length).split(" ");
+        executeCommand(client, tmp[0], tmp[1], msg);
     }
 });
 
