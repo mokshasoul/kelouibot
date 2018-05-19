@@ -1,3 +1,10 @@
+/**
+ * @author Charis-Nicolas Georgiou <cng_it@posteo.net>
+ * @see https://github.com/moksha/keluibot
+ * @copyright 2018
+ * @license GPLv3
+ */
+'use st
 // Imports
 const Youtube = require("youtube-node");
 const auth = require("../../auth.json");
