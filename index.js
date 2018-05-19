@@ -47,19 +47,18 @@ var commands = {
         " ipe m na sas po " + suffix);
         }
     }
-
 }
 /* 
  * Process commands and delegate them to the right processor
  *  msg.channel.send("HOMOCF23FBSM");
  */
 function executeCommand(client, command, suffix, msg) {
-    if ((typeof suffix) === undefined) {
+    if (typeof suffix === 'undefined') {
         console.log("setting suffix to default value");
         suffix = "";
     }
     if (command in commands) {
-        commands[command].process(client, msg);
+        commands[command].process(client, msg, suffix);
         /*
             msg.channel.send("O " + msg.author.username + " ipe m na gire4o ntampoushi pou to " + command + " je na tous po " + suffix);
             */ 
