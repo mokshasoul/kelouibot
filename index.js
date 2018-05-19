@@ -35,8 +35,16 @@ var commands = {
     },
     'youtube': {
         description: 'will be implemented',
-        process: function (client, msg) {
+        process: function (client, msg, suffix) {
             msg.channel.send("o mixalakis e vlakas");
+        }
+    },
+    'say': {
+        usage: '<message>',
+        description: 'bot repeats a messsage',
+        process: function (client, msg, suffix) {
+            msg.channel.send("Kalimeres o " +  msg.author.username +
+        " ipe m na sas po " + suffix);
         }
     }
 
@@ -46,13 +54,15 @@ var commands = {
  *  msg.channel.send("HOMOCF23FBSM");
  */
 function executeCommand(client, command, suffix, msg) {
-    if(suffix typeof undefined){
+    if ((typeof suffix) === undefined) {
         console.log("setting suffix to default value");
         suffix = "";
     }
-    if( command in commands) {
+    if (command in commands) {
         commands[command].process(client, msg);
-        msg.channel.send("O " + msg.author.username + " ipe m na gire4o ntampoushi pou to " + command + " je na tous po " + suffix);
+        /*
+            msg.channel.send("O " + msg.author.username + " ipe m na gire4o ntampoushi pou to " + command + " je na tous po " + suffix);
+            */ 
     }
 }
 client.on('presence', (user, status) => {
