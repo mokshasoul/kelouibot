@@ -5,17 +5,15 @@
  * @license GPLv3
  */
 'use strict';
-
+// Imports -- External
 const Discord = require('discord.js');
 
-console.log('Booting keluiBot\n');
-
-const auth = require('./auth.json');
+//Imports -- Internal
+const yt = require('./plugins/youtube/youtube.js');
 const utils = require('./utils.js');
 
-// Create a new discord client
-const client = new Discord.Client();
-
+// Configs
+const auth = require('./auth.json');
 var Config = {};
 try {
     var Config = require('./config.json');
@@ -25,19 +23,24 @@ try {
     console.log('Please create config file');
 }
 Config.commandprefix = '!';
+var yt_client = new yt.YouTubeClient();
+// Main
+const client = new Discord.Client();
+console.log('Booting keluiBot\n');
 
 var commands = {
     'whofuckedup': {
         description: 'our very own hello world',
         process: function (client, msg) {
-            var text = 'ilias ofc\n';
-            msg.channel.send(text);
+            msg.channel.send("AAAHHH REEE ILIAAAA AAAHH\n");
         }
     },
     'youtube': {
-        description: 'will be implemented',
+        usage: "<search term>",
+        description: "pulls a list of videos from youtube",
         process: function (client, msg, suffix) {
-            msg.channel.send("o mixalakis e vlakas");
+        console.log(yt_client);
+        yt_client.respond(suffix, msg.channel, client);
         }
     },
     'say': {
