@@ -21,6 +21,7 @@ YouTubeClient.prototype.respond =  function (query, channel, client) {
         channel.send("Ti sto poutso, estilamente lathos");
         channel.send(that.RickrollUrl);
     } else {
+        console.log(result);
         if (!result || result.items ||
             result.items.length < 1) {
             channel.send(YT_WATCH_URI +
