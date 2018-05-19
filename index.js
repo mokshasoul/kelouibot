@@ -10,7 +10,8 @@ const Discord = require('discord.js');
 
 console.log('Booting keluiBot\n');
 
-var auth = require('./auth.json');
+const auth = require('./auth.json');
+const utils = require('./utils.js');
 
 // Create a new discord client
 const client = new Discord.Client();
@@ -71,14 +72,15 @@ client.on('presence', (user, status) => {
 });
 client.on('ready', () => {
     // Greet the channel
-    console.log('Serving channels' + client.channels.size);
+    console.log('Serving channels: ' + client.channels.size);
 });
 client.on('message', msg => {
     if (msg.author.id !== client.user.id &&
         msg.content.startsWith(Config.commandprefix)) {
         console.log("Command: " + msg.content + " invoked by " + msg.author.username);
-        var tmp = msg.content.slice(1, msg.content.length).split(" ");
-        executeCommand(client, tmp[0], tmp[1], msg);
+        var tokenized_command = utils.tokenize_command(msg.content);
+        executeCommand(client, tokenized_command.command,
+            tokenized_command.suffix, msg);
     }
 });
 
