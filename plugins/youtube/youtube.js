@@ -4,9 +4,9 @@
  * @copyright 2018
  * @license GPLv3
  */
-'use strict';
+'use strict';.
 // Imports
-const Youtube = require("youtube-node");
+const youtube_node = require("youtube-node");
 const auth = require("../../auth.json");
 
 // CONSTANT VARS
@@ -14,14 +14,12 @@ const YT_WATCH_URI = "https://www.youtube.com/watch?v=";
 
 function YouTubeClient() {
     this.RickrollUrl = 'http://www.youtube.com/watch?v=oHg5SJYRHA0';
-    this.ytclient = new Youtube();
-    console.log(auth);
+    this.ytclient = new youtube_node();
     this.ytclient.setKey(auth.youtube_api_key);
     this.ytclient.addParam('type', 'video');
 };
 YouTubeClient.prototype.respond =  function (query, channel, client) {
     var that = this;
-    console.log(query);
     this.ytclient.search(query, 1, function (error, result) {
     if (error) {
         console.log(error);
