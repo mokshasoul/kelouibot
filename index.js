@@ -2,7 +2,7 @@
  * @author Charis-Nicolas Georgiou <cng_it@posteo.net>
  * @see https://github.com/moksha/keluibot
  * @copyright 2018
- * @license MIT
+ * @license GPLv3
  */
 'use strict';
 
@@ -43,8 +43,8 @@ var commands = {
         usage: '<message>',
         description: 'bot repeats a messsage',
         process: function (client, msg, suffix) {
-            msg.channel.send("Kalimeres o " +  msg.author.username +
-        " ipe m na sas po " + suffix);
+            msg.channel.send("Kalimeres o " + msg.author.username +
+                " ipe m na sas po " + suffix);
         }
     }
 }
@@ -61,18 +61,21 @@ function executeCommand(client, command, suffix, msg) {
         commands[command].process(client, msg, suffix);
         /*
             msg.channel.send("O " + msg.author.username + " ipe m na gire4o ntampoushi pou to " + command + " je na tous po " + suffix);
-            */ 
+            */
     }
 }
 client.on('presence', (user, status) => {
     console.log(user + " " + status);
+    const channel = client.channels.find('malakies');
+    channel.send('Ntampo koumpare  ${user}');
 });
 client.on('ready', () => {
     // Greet the channel
     console.log('Serving channels' + client.channels.size);
 });
 client.on('message', msg => {
-    if (msg.author.id !== client.user.id && msg.content.startsWith(Config.commandprefix)) {
+    if (msg.author.id !== client.user.id &&
+        msg.content.startsWith(Config.commandprefix)) {
         console.log("Command: " + msg.content + " invoked by " + msg.author.username);
         var tmp = msg.content.slice(1, msg.content.length).split(" ");
         executeCommand(client, tmp[0], tmp[1], msg);
