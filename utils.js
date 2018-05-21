@@ -18,7 +18,7 @@ function tokenize_command(command) {
     var tmp = command.split(" ")
 
     if (tmp.length < 2) {
-        tokenized_command.command = tmp[0];
+        tokenized_command.command = tmp[0].replace("!", "");
         return tokenized_command;
     }else{
         tokenized_command.command = tmp[0].replace("!", "");
