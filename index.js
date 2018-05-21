@@ -52,10 +52,17 @@ var commands = {
                 " ipe m na sas po " + suffix);
         }
     },
+    'shame': {
+        usage: '!shame',
+        description: 'bot plays shame from game of thrones',
+        process: function(client, msg) {
+            msg.channel.send("Test");
+        }
+    },
     'help': {
         usage: '!help',
         description: 'Displays help',
-        process: function (client, msg, suffix) {
+        process: function (client, msg) {
             msg.channel.send(list_available_commands())
         }
     }
