@@ -4,7 +4,7 @@
  * @copyright 2018
  * @license GPLv3
  */
-'use strict';.
+'use strict';
 // Imports
 const youtube_node = require("youtube-node");
 const auth = require("../../auth.json");
