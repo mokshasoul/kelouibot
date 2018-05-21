@@ -30,13 +30,14 @@ console.log('Booting keluiBot\n');
 
 var commands = {
     'whofuckedup': {
+        usage: '!whofuckedup',
         description: 'our very own hello world',
-        process: function (client, msg) {
+        process: function (client, msg, suffix) {
             msg.channel.send("AAAHHH REEE ILIAAAA AAAHH\n");
         }
     },
     'youtube': {
-        usage: "<search term>",
+        usage: "!youtube <search term>",
         description: "pulls a list of videos from youtube",
         process: function (client, msg, suffix) {
         console.log(yt_client);
@@ -44,12 +45,33 @@ var commands = {
         }
     },
     'say': {
-        usage: '<message>',
+        usage: '!say <message>',
         description: 'bot repeats a messsage',
         process: function (client, msg, suffix) {
             msg.channel.send("Kalimeres o " + msg.author.username +
                 " ipe m na sas po " + suffix);
         }
+    },
+    'help': {
+        usage: '!help',
+        description: 'Displays help',
+        process: function (client, msg, suffix) {
+            msg.channel.send(list_available_commands())
+        }
+    }
+}
+//TODO: Redo in markdown template
+function list_available_commands() {
+    if (typeof commands === 'undefined'){
+        return "No commands registered with bot"
+    } else {
+        var reply = "List of commands:\nName\tDesc\t\Usage"
+        var reply = reply + "\n" + "-".repeat(8) + "\n"
+       for(var command in commands) {
+            reply = reply + command +":\t" + 
+            commands[command].description + "\t" + commands[command].usage + "\n";
+       }
+       return reply
     }
 }
 /*
