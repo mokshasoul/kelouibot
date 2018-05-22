@@ -11,6 +11,7 @@ const Discord = require('discord.js');
 //Imports -- Internal
 const yt = require('./plugins/youtube/youtube.js');
 const utils = require('./utils.js');
+const shame = require('./plugins/shame/shame');
 
 // Configs
 const auth = require('./auth.json');
@@ -56,7 +57,7 @@ var commands = {
         usage: '!shame',
         description: 'bot plays shame from game of thrones',
         process: function(client, msg) {
-            msg.channel.send("Test");
+            shame(client, msg);
         }
     },
     'help': {
