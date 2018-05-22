@@ -20,6 +20,7 @@ function YouTubeClient() {
 };
 YouTubeClient.prototype.respond =  function (query, channel, client) {
     var that = this;
+    //TODO: Fail gracefully if item does not exist
     this.ytclient.search(query, 1, function (error, result) {
     if (error) {
         console.log(error);
