@@ -40,7 +40,6 @@ var commands = {
         usage: "!youtube <search term>",
         description: "pulls a list of videos from youtube",
         process: function (client, msg, suffix) {
-        console.log(yt_client);
         yt_client.respond(suffix, msg.channel, client);
         }
     },
@@ -52,6 +51,7 @@ var commands = {
                 " ipe m na sas po " + suffix);
         }
     },
+    //TODO: Write shame plugin
     'shame': {
         usage: '!shame',
         description: 'bot plays shame from game of thrones',
