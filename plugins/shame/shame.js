@@ -20,6 +20,9 @@ module.exports =
                 connection => {
                     const stream = ytdl(SHAME_URI, { filter: 'audioonly' });
                     const dispatcher = connection.playStream(stream, streamOptions);
+                    dispatcher.on('error', (err) => {
+                        console.log(err);
+                    });
                     dispatcher.on('end', () => {
                         connection.channel.leave()
                     });
