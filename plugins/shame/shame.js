@@ -5,6 +5,9 @@
  * @license GPLv3
  */
 "use strict";
+const ytdl = require('ytdl-core');
+const streamOptions = { seek: 0, volume: 1 };
+const SHAME_URI = 'https://www.youtube.com/watch?v=SrDSqODtEFM'
 
 module.exports =
     /**
@@ -12,16 +15,14 @@ module.exports =
      * @param {Message} msg
      */
     function shame(client, msg) {
-        const broadcast = client.createVoiceBroadcast();
-        broadcast.playFile('C:/PWS/keluibot/plugins/shame/shame.ogg');
         if (msg.member.voiceChannel) {
             msg.member.voiceChannel.join().then(
                 connection => {
-                    //msg.reply("Connected!");
-                    var dispatcher = connection.playBroadcast(broadcast)
+                    const stream = ytdl(SHAME_URI, { filter: 'audioonly' });
+                    const dispatcher = connection.playStream(stream, streamOptions);
                     dispatcher.on('end', () => {
                         connection.channel.leave()
-                    })
+                    });
                 }).catch(console.log);
         } else {
             msg.reply("No voice channel found");
