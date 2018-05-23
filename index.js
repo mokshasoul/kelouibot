@@ -12,7 +12,6 @@ const Discord = require('discord.js');
 const yt = require('./plugins/youtube/youtube.js');
 const utils = require('./utils.js');
 const shame = require('./plugins/shame/shame');
-
 // Configs
 const auth = require('./auth.json');
 var Config = {};
@@ -25,6 +24,7 @@ try {
 }
 Config.commandprefix = '!';
 var yt_client = new yt.YouTubeClient();
+
 // Main
 const client = new Discord.Client();
 console.log('Booting keluiBot\n');
@@ -82,9 +82,12 @@ function list_available_commands() {
        return reply
     }
 }
-/*
- * Process commands and delegate them to the right processor
- *  msg.channel.send("HOMOCF23FBSM");
+/**
+ * 
+ * @param {Discord.Client} client 
+ * @param {string} command 
+ * @param {string} suffix 
+ * @param {Message} msg 
  */
 function executeCommand(client, command, suffix, msg) {
     if (typeof suffix === 'undefined') {

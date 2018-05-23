@@ -1,2 +1,6 @@
 {
+    "eslint.enable": true,
+    "eslint.packageManager": "yarn",
+    "npm.packageManager": "yarn",
+    "npm.enableScriptExplorer": true
 }
