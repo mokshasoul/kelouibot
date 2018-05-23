@@ -27,11 +27,12 @@ YouTubeClient.prototype.respond =  function (query, channel, client) {
         channel.send("Ti sto poutso, estilamente lathos");
         channel.send(that.RickrollUrl);
     } else {
-        console.log(result);
-        if (!result || result.items ||
-            result.items.length < 1) {
+        if (result && result.items &&
+            result.items.length > 0) {
             channel.send(YT_WATCH_URI +
                 result.items[0].id.videoId);
+        } else {
+            channel.send("Ti sto poutso m estilate re kopelia en ivra tpt me tto " + query);
         }
     }});
 };
