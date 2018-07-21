@@ -12,6 +12,7 @@ const Discord = require('discord.js');
 const yt = require('./plugins/youtube/youtube.js');
 const utils = require('./utils.js');
 const shame = require('./plugins/shame/shame');
+var shame_mutex = false;
 // Configs
 const auth = require('./auth.json');
 var Config = {};
@@ -57,7 +58,14 @@ var commands = {
         usage: '!shame',
         description: 'bot plays shame from game of thrones',
         process: function(client, msg) {
-            shame(client, msg);
+            if(!shame_mutex){
+                shame_mutex = true;
+                shame(client, msg);
+                shame_mutex = false;
+            } else {
+                console.log("Mutex active");
+                msg.channel.send("Mutex active cannot send shame twice");
+            }
         }
     },
     'help': {
