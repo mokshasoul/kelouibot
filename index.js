@@ -34,7 +34,7 @@ var commands = {
     'whofuckedup': {
         usage: '!whofuckedup',
         description: 'our very own hello world',
-        process: function (client, msg, suffix) {
+        process: function (client, msg) {
             msg.channel.send("AAAHHH REEE ILIAAAA AAAHH\n");
         }
     },
@@ -60,8 +60,7 @@ var commands = {
         process: function(client, msg) {
             if(!shame_mutex){
                 shame_mutex = true;
-                shame(client, msg);
-                shame_mutex = false;
+                shame_mutex = shame(client, msg);
             } else {
                 console.log("Mutex active");
                 msg.channel.send("Mutex active cannot send shame twice");
