@@ -61,6 +61,7 @@ var commands = {
             if(!shame_mutex){
                 shame_mutex = true;
                 shame_mutex = shame(client, msg);
+                shame_mutex = false;
             } else {
                 console.log("Mutex active");
                 msg.channel.send("Mutex active cannot send shame twice");
